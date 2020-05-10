@@ -25,13 +25,16 @@ dependencies:
   cupertino_icons: ^0.1.2
 
   # state management
-  stacked: ^1.2.2
+  stacked: ^1.4.3
+  stacked_hooks: 0.1.1+3
   # navigation
   auto_route:
-  stacked_services:
+  stacked_services: ^0.2.3
   # inversion of control
   get_it:
   injectable:
+  flutter_hooks:
+  observable_ish:
 
 dev_dependencies:
   flutter_test:
