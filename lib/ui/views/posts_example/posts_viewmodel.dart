@@ -10,7 +10,3 @@ class PostsViewModel extends FutureViewModel<List<Post>> {
   @override
   Future<List<Post>> futureToRun() => _postsService.getPostsForUser(3);
 }
-
-class PostsCountViewModel extends BaseViewModel {
-  int get postsCount => locator<PostsService>().posts.length;
-}

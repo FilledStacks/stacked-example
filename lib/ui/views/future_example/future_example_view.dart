@@ -19,12 +19,13 @@ class FutureExampleView extends StatelessWidget {
                           mainAxisSize: MainAxisSize.min,
                           children: <Widget>[
                             Text(model.data ?? 'NO_DATA'),
-                           
                           ],
                         )),
-                        floatingActionButton: FloatingActionButton(child:  _ErrorMessage(),),
+              floatingActionButton: FloatingActionButton(
+                child: _ErrorMessage(),
+                onPressed: () {},
+              ),
             ),
-          
         viewModelBuilder: () => FutureExampleViewModel());
   }
 }

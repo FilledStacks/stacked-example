@@ -13,11 +13,17 @@ import 'package:my_app/ui/views/home/home_view.dart';
 abstract class Routes {
   static const startupViewRoute = '/';
   static const homeViewRoute = '/home-view-route';
+  static const all = {
+    startupViewRoute,
+    homeViewRoute,
+  };
 }
 
 class Router extends RouterBase {
-  //This will probably be removed in future versions
-  //you should call ExtendedNavigator.ofRouter<Router>() directly
+  @override
+  Set<String> get allRoutes => Routes.all;
+
+  @Deprecated('call ExtendedNavigator.ofRouter<Router>() directly')
   static ExtendedNavigatorState get navigator =>
       ExtendedNavigator.ofRouter<Router>();
 
@@ -32,7 +38,7 @@ class Router extends RouterBase {
         final typedArgs =
             args as StartupViewArguments ?? StartupViewArguments();
         return MaterialPageRoute<dynamic>(
-          builder: (_) => StartupView(key: typedArgs.key),
+          builder: (context) => StartupView(key: typedArgs.key),
           settings: settings,
         );
       case Routes.homeViewRoute:
@@ -41,7 +47,7 @@ class Router extends RouterBase {
         }
         final typedArgs = args as HomeViewArguments ?? HomeViewArguments();
         return MaterialPageRoute<dynamic>(
-          builder: (_) => HomeView(key: typedArgs.key),
+          builder: (context) => HomeView(key: typedArgs.key),
           settings: settings,
         );
       default:
@@ -50,9 +56,9 @@ class Router extends RouterBase {
   }
 }
 
-//**************************************************************************
+// *************************************************************************
 // Arguments holder classes
-//***************************************************************************
+// **************************************************************************
 
 //StartupView arguments holder class
 class StartupViewArguments {

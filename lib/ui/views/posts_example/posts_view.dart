@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:my_app/ui/views/posts/posts_viewmodel.dart';
 import 'package:stacked/stacked.dart';
+
+import 'posts_viewmodel.dart';
 
 class PostsView extends StatelessWidget {
   const PostsView({Key key}) : super(key: key);

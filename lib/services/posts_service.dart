@@ -1,7 +1,8 @@
 import 'package:injectable/injectable.dart';
 import 'package:my_app/app/locator.dart';
 import 'package:my_app/datamodels/post.dart';
-import 'package:my_app/services/api.dart';
+
+import 'api.dart';
 
 @lazySingleton
 class PostsService {

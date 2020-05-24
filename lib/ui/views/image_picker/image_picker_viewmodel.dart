@@ -1,13 +1,12 @@
 import 'dart:io';
 
 import 'package:flutter/foundation.dart';
-import 'package:my_app/services/image_service.dart';
-import 'package:stacked/stacked.dart';
 import 'package:my_app/app/locator.dart';
+import 'package:my_app/services/media_service.dart';
+import 'package:stacked/stacked.dart';
 
 class ImagePickerViewModel extends BaseViewModel {
   final _mediaService = locator<MediaService>();
-  
   File _selectedImage;
 
   bool get hasSelectedImage => _selectedImage != null;
