@@ -12,10 +12,9 @@ class StartupView extends StatelessWidget {
         body: Center(
           child: Text('Start up view'),
         ),
-        floatingActionButton:
-            FloatingActionButton(onPressed: () => model.navigateToHome()),
       ),
       viewModelBuilder: () => StartupViewModel(),
+      onModelReady: (model) => model.initialise(),
     );
   }
 }
