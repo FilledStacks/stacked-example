@@ -1,7 +1,6 @@
 import 'package:mockito/mockito.dart';
 import 'package:my_app/app/locator.dart';
 import 'package:my_app/datamodels/address.dart';
-import 'package:my_app/services/permissions_service.dart';
 import 'package:my_app/services/shared_preferences_service.dart';
 import 'package:my_app/system/app_database.dart';
 import 'package:stacked_services/stacked_services.dart';
@@ -13,14 +12,12 @@ class NavigationServiceMock extends Mock implements NavigationService {}
 
 class AppDatabaseMock extends Mock implements AppDatabase {}
 
-class PermissionsServiceMock extends Mock implements PermissionsService {}
-
-SharedPreferencesService getAndRegisterSharedPreferencesMock({
-  bool hasUser = true,
-}) {
+SharedPreferencesService getAndRegisterSharedPreferencesMock(
+    {bool hasUser = true}) {
   _removeRegistrationIfExists<SharedPreferencesService>();
   var service = SharedPreferencesServiceMock();
 
+  // stubbing
   when(service.hasUser).thenReturn(hasUser);
 
   locator.registerSingleton<SharedPreferencesService>(service);
@@ -34,22 +31,7 @@ NavigationService getAndRegisterNavigationServiceMock() {
   return service;
 }
 
-PermissionsService getAndRegisterPermissionServiceMock(
-    {bool hasLocationPermission = true}) {
-  _removeRegistrationIfExists<PermissionsService>();
-  var service = PermissionsServiceMock();
-
-  when(service.hasLocationPermission)
-      .thenAnswer((_) => Future.value(hasLocationPermission));
-
-  when(service.requestLocationPermission())
-      .thenAnswer((realInvocation) => Future.value());
-
-  locator.registerSingleton<PermissionsService>(service);
-  return service;
-}
-
-AppDatabaseMock getAndRegisterAppDatabaseMock({bool returnAddress = true}) {
+AppDatabase getAndRegisterDatabaseMock({bool returnAddress = true}) {
   _removeRegistrationIfExists<AppDatabase>();
   var database = AppDatabaseMock();
 
@@ -65,15 +47,13 @@ AppDatabaseMock getAndRegisterAppDatabaseMock({bool returnAddress = true}) {
 void registerServices() {
   getAndRegisterSharedPreferencesMock();
   getAndRegisterNavigationServiceMock();
-  getAndRegisterAppDatabaseMock();
-  getAndRegisterPermissionServiceMock();
+  getAndRegisterDatabaseMock();
 }
 
 void unregisterServices() {
   locator.unregister<SharedPreferencesService>();
   locator.unregister<NavigationService>();
   locator.unregister<AppDatabase>();
-  locator.unregister<PermissionsService>();
 }
 
 void _removeRegistrationIfExists<T>() {
