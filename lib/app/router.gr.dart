@@ -12,71 +12,69 @@ import 'package:my_app/ui/views/home/home_view.dart';
 import 'package:my_app/ui/views/address_selection/address_selection_view.dart';
 import 'package:my_app/ui/views/welcome_view/welcome_view.dart';
 
-abstract class Routes {
-  static const startupViewRoute = '/';
-  static const homeViewRoute = '/home-view-route';
-  static const addressSelectionViewRoute = '/address-selection-view-route';
-  static const welcomeViewRoute = '/welcome-view-route';
+class Routes {
+  static const String startupView = '/';
+  static const String homeView = '/home-view';
+  static const String addressSelectionView = '/address-selection-view';
+  static const String welcomeView = '/welcome-view';
+  static const all = <String>{
+    startupView,
+    homeView,
+    addressSelectionView,
+    welcomeView,
+  };
 }
 
 class Router extends RouterBase {
-  //This will probably be removed in future versions
-  //you should call ExtendedNavigator.ofRouter<Router>() directly
-  static ExtendedNavigatorState get navigator =>
-      ExtendedNavigator.ofRouter<Router>();
-
   @override
-  Route<dynamic> onGenerateRoute(RouteSettings settings) {
-    final args = settings.arguments;
-    switch (settings.name) {
-      case Routes.startupViewRoute:
-        if (hasInvalidArgs<StartupViewArguments>(args)) {
-          return misTypedArgsRoute<StartupViewArguments>(args);
-        }
-        final typedArgs =
-            args as StartupViewArguments ?? StartupViewArguments();
-        return MaterialPageRoute<dynamic>(
-          builder: (_) => StartupView(key: typedArgs.key),
-          settings: settings,
-        );
-      case Routes.homeViewRoute:
-        if (hasInvalidArgs<HomeViewArguments>(args)) {
-          return misTypedArgsRoute<HomeViewArguments>(args);
-        }
-        final typedArgs = args as HomeViewArguments ?? HomeViewArguments();
-        return MaterialPageRoute<dynamic>(
-          builder: (_) => HomeView(key: typedArgs.key),
-          settings: settings,
-        );
-      case Routes.addressSelectionViewRoute:
-        if (hasInvalidArgs<AddressSelectionViewArguments>(args)) {
-          return misTypedArgsRoute<AddressSelectionViewArguments>(args);
-        }
-        final typedArgs = args as AddressSelectionViewArguments ??
-            AddressSelectionViewArguments();
-        return MaterialPageRoute<dynamic>(
-          builder: (_) => AddressSelectionView(key: typedArgs.key),
-          settings: settings,
-        );
-      case Routes.welcomeViewRoute:
-        if (hasInvalidArgs<WelcomeViewArguments>(args)) {
-          return misTypedArgsRoute<WelcomeViewArguments>(args);
-        }
-        final typedArgs =
-            args as WelcomeViewArguments ?? WelcomeViewArguments();
-        return MaterialPageRoute<dynamic>(
-          builder: (_) => WelcomeView(key: typedArgs.key),
-          settings: settings,
-        );
-      default:
-        return unknownRoutePage(settings.name);
-    }
-  }
+  List<RouteDef> get routes => _routes;
+  final _routes = <RouteDef>[
+    RouteDef(Routes.startupView, page: StartupView),
+    RouteDef(Routes.homeView, page: HomeView),
+    RouteDef(Routes.addressSelectionView, page: AddressSelectionView),
+    RouteDef(Routes.welcomeView, page: WelcomeView),
+  ];
+  @override
+  Map<Type, AutoRouteFactory> get pagesMap => _pagesMap;
+  final _pagesMap = <Type, AutoRouteFactory>{
+    StartupView: (RouteData data) {
+      var args = data.getArgs<StartupViewArguments>(
+          orElse: () => StartupViewArguments());
+      return MaterialPageRoute<dynamic>(
+        builder: (context) => StartupView(key: args.key),
+        settings: data,
+      );
+    },
+    HomeView: (RouteData data) {
+      var args =
+          data.getArgs<HomeViewArguments>(orElse: () => HomeViewArguments());
+      return MaterialPageRoute<dynamic>(
+        builder: (context) => HomeView(key: args.key),
+        settings: data,
+      );
+    },
+    AddressSelectionView: (RouteData data) {
+      var args = data.getArgs<AddressSelectionViewArguments>(
+          orElse: () => AddressSelectionViewArguments());
+      return MaterialPageRoute<dynamic>(
+        builder: (context) => AddressSelectionView(key: args.key),
+        settings: data,
+      );
+    },
+    WelcomeView: (RouteData data) {
+      var args = data.getArgs<WelcomeViewArguments>(
+          orElse: () => WelcomeViewArguments());
+      return MaterialPageRoute<dynamic>(
+        builder: (context) => WelcomeView(key: args.key),
+        settings: data,
+      );
+    },
+  };
 }
 
-//**************************************************************************
+// *************************************************************************
 // Arguments holder classes
-//***************************************************************************
+// **************************************************************************
 
 //StartupView arguments holder class
 class StartupViewArguments {

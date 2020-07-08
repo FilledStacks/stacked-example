@@ -4,11 +4,10 @@ import 'package:my_app/ui/views/home/home_view.dart';
 import 'package:my_app/ui/views/startup/startup_view.dart';
 import 'package:my_app/ui/views/welcome_view/welcome_view.dart';
 
-@MaterialAutoRouter()
-class $Router {
-  @initial
-  StartupView startupViewRoute;
-  HomeView homeViewRoute;
-  AddressSelectionView addressSelectionViewRoute;
-  WelcomeView welcomeViewRoute;
-}
+@MaterialAutoRouter(routes: [
+  MaterialRoute(page: StartupView, initial: true),
+  MaterialRoute(page: HomeView),
+  MaterialRoute(page: AddressSelectionView),
+  MaterialRoute(page: WelcomeView)
+])
+class $Router {}

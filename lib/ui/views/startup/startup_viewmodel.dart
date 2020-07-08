@@ -17,9 +17,9 @@ class StartupViewModel extends BaseViewModel {
       if (currentAddress == null) {
         // has permissions
         // if they don't we request permissions before navigating
-        await _navigationService.replaceWith(Routes.addressSelectionViewRoute);
+        await _navigationService.replaceWith(Routes.addressSelectionView);
       } else {
-        await _navigationService.replaceWith(Routes.homeViewRoute);
+        await _navigationService.replaceWith(Routes.homeView);
       }
     }
   }

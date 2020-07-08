@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:my_app/app/locator.dart';
-import 'package:my_app/ui/views/image_picker/image_picker_view.dart';
+import 'package:my_app/ui/views/home/home_view.dart';
 import 'package:stacked_services/stacked_services.dart';
 
 import 'app/router.gr.dart';
@@ -15,7 +15,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Flutter Demo',
-      home: ImagePickerView(),
+      home: HomeView(),
       // initialRoute: Routes.startupViewRoute,
       onGenerateRoute: Router().onGenerateRoute,
       navigatorKey: locator<NavigationService>().navigatorKey,

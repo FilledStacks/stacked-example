@@ -40,7 +40,7 @@ class _ErrorMessage extends ViewModelWidget<FutureExampleViewModel> {
   ) {
     return model.hasError
         ? Text(
-            model.error.message,
+            model.modelError.message,
             style: TextStyle(color: Colors.red),
           )
         : Container();
