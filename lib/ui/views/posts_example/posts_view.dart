@@ -10,9 +10,10 @@ class PostsView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ViewModelBuilder<PostsViewModel>.reactive(
+      // 1 dispose viewmodel
       disposeViewModel: false,
+      // 3. set initialiseSpecialViewModelsOnce to true to indicate only initialising once
       initialiseSpecialViewModelsOnce: true,
-      fireOnModelReadyOnce: true,
       builder: (context, model, child) => Scaffold(
         backgroundColor: Colors.grey[900],
         body: model.isBusy
@@ -85,6 +86,7 @@ class PostsView extends StatelessWidget {
                     ),
                   ),
       ),
+      // 2. register viewmodel as singleton and get from locator
       viewModelBuilder: () => locator<PostsViewModel>(),
     );
   }
