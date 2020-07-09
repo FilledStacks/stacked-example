@@ -24,7 +24,7 @@ void main() {
         var navigationService = getAndRegisterNavigationServiceMock();
         var model = StartupViewModel();
         await model.initialise();
-        verify(navigationService.replaceWith(Routes.homeViewRoute));
+        verify(navigationService.replaceWith(Routes.homeView));
       });
 
       test(
@@ -43,7 +43,7 @@ void main() {
         var navigation = getAndRegisterNavigationServiceMock();
         var model = StartupViewModel();
         await model.initialise();
-        verify(navigation.replaceWith(Routes.addressSelectionViewRoute));
+        verify(navigation.replaceWith(Routes.addressSelectionView));
       });
     });
   });
