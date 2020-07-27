@@ -1,17 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:my_app/app/locator.dart';
-import 'package:my_app/enums/dialog_type.dart';
+import 'package:my_app/enum/dialog_type.dart';
 import 'package:stacked_services/stacked_services.dart';
 
 void setupDialogUi() {
   var dialogService = locator<DialogService>();
 
   dialogService.registerCustomDialogUi((context, dialogRequest) => Dialog(
-        child: _customDialogUi(
-          dialogRequest,
-          (dialogResponse) => dialogService.completeDialog(dialogResponse),
-        ),
+        child: _customDialogUi(dialogRequest,
+            (dialogResponse) => dialogService.completeDialog(dialogResponse)),
       ));
 }
 
@@ -38,11 +36,8 @@ Widget _customDialogUi(
 class _BasicCustomDialog extends StatelessWidget {
   final DialogRequest dialogRequest;
   final Function(DialogResponse) onDialogTap;
-  const _BasicCustomDialog({
-    Key key,
-    this.dialogRequest,
-    this.onDialogTap,
-  }) : super(key: key);
+  const _BasicCustomDialog({Key key, this.dialogRequest, this.onDialogTap})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -53,7 +48,6 @@ class _BasicCustomDialog extends StatelessWidget {
         borderRadius: BorderRadius.circular(10),
       ),
       child: Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisSize: MainAxisSize.min,
         children: <Widget>[
           Text(
@@ -65,16 +59,13 @@ class _BasicCustomDialog extends StatelessWidget {
           ),
           Text(
             dialogRequest.description,
-            style: TextStyle(
-              fontSize: 18,
-            ),
+            style: TextStyle(fontSize: 18),
             textAlign: TextAlign.center,
           ),
           SizedBox(
             height: 20,
           ),
           GestureDetector(
-            // Complete the dialog when you're done with it to return some data
             onTap: () => onDialogTap(DialogResponse(confirmed: true)),
             child: Container(
               child: dialogRequest.showIconInMainButton
@@ -98,11 +89,8 @@ class _BasicCustomDialog extends StatelessWidget {
 class _FormCustomDialog extends HookWidget {
   final DialogRequest dialogRequest;
   final Function(DialogResponse) onDialogTap;
-  const _FormCustomDialog({
-    Key key,
-    this.dialogRequest,
-    this.onDialogTap,
-  }) : super(key: key);
+  const _FormCustomDialog({Key key, this.dialogRequest, this.onDialogTap})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -131,7 +119,6 @@ class _FormCustomDialog extends HookWidget {
             height: 20,
           ),
           GestureDetector(
-            // Complete the dialog when you're done with it to return some data
             onTap: () =>
                 onDialogTap(DialogResponse(responseData: [controller.text])),
             child: Container(

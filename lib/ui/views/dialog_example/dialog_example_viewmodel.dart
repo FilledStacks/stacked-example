@@ -1,5 +1,5 @@
 import 'package:my_app/app/locator.dart';
-import 'package:my_app/enums/dialog_type.dart';
+import 'package:my_app/enum/dialog_type.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
 
@@ -17,10 +17,8 @@ class DialogExampleViewModel extends BaseViewModel {
       title: 'The Basic Dialog',
       description:
           'This is the description for the dialog that shows up under the title',
-      buttonTitle: 'This is the main button title',
-      dialogPlatform: DialogPlatform.Material,
+      buttonTitle: 'Main title',
       cancelTitle: 'Cancel',
-      barrierDismissible: true,
     );
 
     print('DialogResponse: ${response?.confirmed}');
@@ -29,9 +27,8 @@ class DialogExampleViewModel extends BaseViewModel {
   Future showConfirmationDialog() async {
     var response = await _dialogService.showConfirmationDialog(
       title: 'The Confirmation Dialog',
-      description: 'Do you want to update Confirmation state in the UI?',
+      description: 'Do you want to update Confiramtion state in the UI?',
       confirmationTitle: 'Yes',
-      dialogPlatform: DialogPlatform.Material,
       cancelTitle: 'No',
     );
 
@@ -42,10 +39,11 @@ class DialogExampleViewModel extends BaseViewModel {
 
   Future showCustomDialog() async {
     var response = await _dialogService.showCustomDialog(
-      title: 'Please enter your password to confirm',
+      title: 'Please enter your password',
       mainButtonTitle: 'Submit',
       customData: DialogType.Form,
     );
-    print('response data: ${response?.responseData}');
+
+    print('Custom response: ${response?.responseData}');
   }
 }
