@@ -28,7 +28,7 @@ dependencies:
   stacked: ^1.7.1
   stacked_hooks: 0.1.1+3
   # navigation
-  auto_route:
+  auto_route: ^0.6.7
   stacked_services: ^0.4.4+3
   # inversion of control
   get_it:
