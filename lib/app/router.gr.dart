@@ -4,13 +4,15 @@
 // AutoRouteGenerator
 // **************************************************************************
 
-import 'package:flutter/material.dart';
-import 'package:flutter/cupertino.dart';
+// ignore_for_file: public_member_api_docs
+
 import 'package:auto_route/auto_route.dart';
-import 'package:my_app/ui/views/startup/startup_view.dart';
-import 'package:my_app/ui/views/home/home_view.dart';
-import 'package:my_app/ui/views/address_selection/address_selection_view.dart';
-import 'package:my_app/ui/views/welcome_view/welcome_view.dart';
+import 'package:flutter/material.dart';
+
+import '../ui/views/address_selection/address_selection_view.dart';
+import '../ui/views/home/home_view.dart';
+import '../ui/views/startup/startup_view.dart';
+import '../ui/views/welcome_view/welcome_view.dart';
 
 class Routes {
   static const String startupView = '/';
@@ -37,65 +39,29 @@ class Router extends RouterBase {
   @override
   Map<Type, AutoRouteFactory> get pagesMap => _pagesMap;
   final _pagesMap = <Type, AutoRouteFactory>{
-    StartupView: (RouteData data) {
-      var args = data.getArgs<StartupViewArguments>(
-          orElse: () => StartupViewArguments());
+    StartupView: (data) {
       return MaterialPageRoute<dynamic>(
-        builder: (context) => StartupView(key: args.key),
+        builder: (context) => const StartupView(),
         settings: data,
       );
     },
-    HomeView: (RouteData data) {
-      var args =
-          data.getArgs<HomeViewArguments>(orElse: () => HomeViewArguments());
+    HomeView: (data) {
       return MaterialPageRoute<dynamic>(
-        builder: (context) => HomeView(key: args.key),
+        builder: (context) => const HomeView(),
         settings: data,
       );
     },
-    AddressSelectionView: (RouteData data) {
-      var args = data.getArgs<AddressSelectionViewArguments>(
-          orElse: () => AddressSelectionViewArguments());
+    AddressSelectionView: (data) {
       return MaterialPageRoute<dynamic>(
-        builder: (context) => AddressSelectionView(key: args.key),
+        builder: (context) => const AddressSelectionView(),
         settings: data,
       );
     },
-    WelcomeView: (RouteData data) {
-      var args = data.getArgs<WelcomeViewArguments>(
-          orElse: () => WelcomeViewArguments());
+    WelcomeView: (data) {
       return MaterialPageRoute<dynamic>(
-        builder: (context) => WelcomeView(key: args.key),
+        builder: (context) => const WelcomeView(),
         settings: data,
       );
     },
   };
-}
-
-// *************************************************************************
-// Arguments holder classes
-// **************************************************************************
-
-//StartupView arguments holder class
-class StartupViewArguments {
-  final Key key;
-  StartupViewArguments({this.key});
-}
-
-//HomeView arguments holder class
-class HomeViewArguments {
-  final Key key;
-  HomeViewArguments({this.key});
-}
-
-//AddressSelectionView arguments holder class
-class AddressSelectionViewArguments {
-  final Key key;
-  AddressSelectionViewArguments({this.key});
-}
-
-//WelcomeView arguments holder class
-class WelcomeViewArguments {
-  final Key key;
-  WelcomeViewArguments({this.key});
 }
