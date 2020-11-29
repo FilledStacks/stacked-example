@@ -7,30 +7,26 @@ import 'package:stacked_services/stacked_services.dart';
 void setupDialogUi() {
   var dialogService = locator<DialogService>();
 
-  dialogService.registerCustomDialogUi((context, dialogRequest) => Dialog(
-        child: _customDialogUi(dialogRequest,
-            (dialogResponse) => dialogService.completeDialog(dialogResponse)),
-      ));
-}
+  var builders = {
+    DialogType.Form: (BuildContext context, DialogRequest dialogRequest,
+            Function(DialogResponse) completer) =>
+        Dialog(
+          child: _FormCustomDialog(
+            dialogRequest: dialogRequest,
+            onDialogTap: completer,
+          ),
+        ),
+    DialogType.Basic: (BuildContext context, DialogRequest dialogRequest,
+            Function(DialogResponse) completer) =>
+        Dialog(
+          child: _BasicCustomDialog(
+            dialogRequest: dialogRequest,
+            onDialogTap: completer,
+          ),
+        ),
+  };
 
-Widget _customDialogUi(
-  DialogRequest dialogRequest,
-  Function(DialogResponse) onDialogTap,
-) {
-  var dialogType = dialogRequest.customData as DialogType;
-  switch (dialogType) {
-    case DialogType.Form:
-      return _FormCustomDialog(
-        dialogRequest: dialogRequest,
-        onDialogTap: onDialogTap,
-      );
-    case DialogType.Basic:
-    default:
-      return _BasicCustomDialog(
-        dialogRequest: dialogRequest,
-        onDialogTap: onDialogTap,
-      );
-  }
+  dialogService.registerCustomDialogBuilders(builders);
 }
 
 class _BasicCustomDialog extends StatelessWidget {
